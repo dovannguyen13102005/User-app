@@ -20,19 +20,19 @@ class Users:
         return new_user
     def update_user(self, user_id: int, user: User):
         new_user = {"id": user_id, "name": user.name, "age": user.age, "email": user.email}
-        for value in self.users:
+        for idx, value in enumerate(self.users):
             if value["id"] == user_id:
-                value =new_user
-                return {"Message", "Success"}
+                self.users[idx] = new_user
+                return {"Message": "Success"}
         return {"Message", "Error"}
     def find_user_by_id(self, user_id: int):
         for user in self.users:
             if user["id"] == user_id:
                 return user
-        return {"Message", "Not Found"}
+        return {"Message": "Not Found"}
     def remove_user(self, user_id: int):
         for user in self.users:
             if user["id"] == user_id:
                 self.users.remove(user)
-                return {"Messages", "User deleted"}
-        return {"Message", "Not Found"}
+                return {"Messages": "User deleted"}
+        return {"Message": "Not Found"}

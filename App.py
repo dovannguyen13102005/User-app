@@ -19,25 +19,25 @@ app = FastAPI()
 @app.get("/get_users")
 async def get_user(test = Depends(secure)):
     if not test:
-        return {"Message", "don't access"}
+        return {"Message": "don't access"}
     return user_manager.get_all_users()
 @app.post("/add_user")
 async def create_user(user: User, test = Depends(secure)):
     if not test:
-        return {"Message", "don't access"}
+        return {"Message": "don't access"}
     return user_manager.add_user(user)
 @app.get("/find_user/{user_id}")
 async def get_user(user_id: int, test = Depends(secure)):
     if not test:
-        return {"Message", "don't access"}
+        return {"Message": "don't access"}
     return user_manager.find_user_by_id(user_id)
 @app.delete("/remove_user/{user_id}")
 async def delete_user(user_id: int, test = Depends(secure)):
     if not test:
-        return {"Message", "don't access"}
+        return {"Message": "don't access"}
     return user_manager.remove_user(user_id)
 @app.put("/update_user/{user_id}")
 async def update_user(user_id: int, user: User, test = Depends(secure)):
     if not test:
-        return {"Message", "don't access"}
+        return {"Message": "don't access"}
     return user_manager.update_user(user_id, user)
