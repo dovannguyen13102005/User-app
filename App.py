@@ -41,11 +41,11 @@ async def update_user(user_id: int, user: User, test = Depends(secure)):
     if not test:
         return {"Message": "Can't access"}
     return user_manager.update_user(user_id, user)
-@app.get("/find_user_by_name/{user_name}")
-async def get_user(user_name: str, test = Depends(secure)):
+@app.get("/find_user_by_account/{user_account}")
+async def get_user(user_account: str, test = Depends(secure)):
     if not test:
         return {"Message": "Can't access"}
-    return user_manager.find_user_by_name(user_name)
+    return user_manager.find_user_by_name(user_account)
 @app.get("/find_user_by_email/{user_email}")
 async def get_user(user_email: str, test = Depends(secure)):
     if not test:
