@@ -6,6 +6,7 @@ class User(BaseModel):
     name: str
     age: int
     email: str
+    account: str
 
 class Users:
     def __init__(self):
@@ -14,7 +15,9 @@ class Users:
     def get_all_users(self):
         return self.users
     def add_user(self, user: User):
-        new_user = {"id": self.cnt, "name": user.name, "age": user.age,"email": user.email}
+        new_user = {"id": self.cnt, "name": user.name, "age": user.age,"email": user.email, "account": user.account}
+        if any(value["account"] == user.account for value in self.users):
+            return {"Message": "Account already exists"}
         self.users.append(new_user)
         self.cnt += 1
         return new_user
@@ -30,6 +33,16 @@ class Users:
             if user["id"] == user_id:
                 return user
         return {"Message": "Not Found"}
+    def find_user_by_name(self, user_name: str):
+        for user in self.users:
+            if user["name"] == user_name:
+                return user
+        return {"Message": "Not Found"}
+    def find_user_by_email(self, user_email: str):
+        for user in self.users:
+            if user["email"] == user_email:
+                return user
+            return {"Message": "Not Found"}
     def remove_user(self, user_id: int):
         for user in self.users:
             if user["id"] == user_id:
