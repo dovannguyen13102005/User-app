@@ -1,7 +1,7 @@
 from fastapi import APIRouter, HTTPException, FastAPI
 from fastapi.params import Depends
 
-from Models import Users, User
+from Models import Users, User, NewUser
 from fastapi.security import  HTTPBasic, HTTPBasicCredentials
 
 ##router = APIRouter()
@@ -45,7 +45,7 @@ async def update_user(user_id: int, user: User, test = Depends(secure)):
 async def get_user(user_account: str, test = Depends(secure)):
     if not test:
         return {"Message": "Can't access"}
-    return user_manager.find_user_by_name(user_account)
+    return user_manager.find_user_by_account(user_account)
 @app.get("/find_user_by_email/{user_email}")
 async def get_user(user_email: str, test = Depends(secure)):
     if not test:
