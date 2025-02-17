@@ -26,7 +26,10 @@ class Users:
         temp_user = NewUser(self.count, new_user.name, new_user.age, new_user.email, new_user.account, new_user.password)
         if self.check_existed.get(new_user.account):
             return {"Message": "Account existed"}
+        if self.check_existed.get(new_user.email):
+            return {"Message": "Email existed"}
         self.users.append(temp_user)
+        self.check_existed[new_user.email] = True
         self.check_existed[new_user.account] = True
         self.count += 1
         return temp_user
